@@ -1,7 +1,7 @@
 ﻿
 namespace COBRANZAS
 {
-    partial class Form1
+    partial class frmPrincipal
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -31,13 +31,14 @@ namespace COBRANZAS
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(816, 455);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "frmPrincipal";
+            this.Text = "frmPrincipal";
+            this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.ResumeLayout(false);
 
         }

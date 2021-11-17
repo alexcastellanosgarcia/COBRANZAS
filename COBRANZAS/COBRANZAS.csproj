@@ -50,16 +50,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="frmprincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmprincipal.Designer.cs">
+      <DependentUpon>frmprincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmprincipal.resx">
+      <DependentUpon>frmprincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -70,7 +71,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="obj\Debug\COBRANZAS.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="packages.config" />
+    <None Include="packages\MaterialSkin.2.2.3.1\.signature.p7s" />
+    <None Include="packages\MaterialSkin.2.2.3.1\MaterialSkin.2.2.3.1.nupkg" />
+    <None Include="packages\MaterialSkin.2.2.3.1\README.md" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -83,6 +90,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdminDB\.com.txt" />
+    <Content Include="CLIENTES\.gitpeek.txt" />
+    <Content Include="COBRANZA\.gitpeek.txt" />
+    <Content Include="COBROS\.gitpeek.txt" />
+    <Content Include="Configuraciones\.gitpeek.txt" />
+    <Content Include="Correo\.gitpeek.txt" />
+    <Content Include="Disenio\.gitpeek.txt" />
+    <Content Include="Herramientas\.gitpeek.txt" />
+    <Content Include="Iconos\.gitpeek.txt" />
+    <Content Include="Iconos\icon app.ico" />
+    <Content Include="Model\.gitpeek.txt" />
+    <Content Include="MOROSIDAD\.gitpeek.txt" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\lib\net45\MaterialSkin.dll" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\lib\net461\MaterialSkin.dll" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\lib\net48\MaterialSkin.dll" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\lib\net5.0-windows7.0\MaterialSkin.dll" />
+    <Content Include="packages\MaterialSkin.2.2.3.1\nugetIcon.png" />
+    <Content Include="Seguridad\.gitpeek.txt" />
+    <Content Include="SERVICIOS\.gitpeek.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
