@@ -50,15 +50,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDB\TParamSql.cs" />
+    <Compile Include="CLIENTES\frmClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CLIENTES\frmClientes.Designer.cs">
+      <DependentUpon>frmClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CLIENTES\TAD_Clientes.cs" />
+    <Compile Include="CLIENTES\TCN_Clientes.cs" />
     <Compile Include="frmprincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmprincipal.Designer.cs">
       <DependentUpon>frmprincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\TModels.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CLIENTES\frmClientes.resx">
+      <DependentUpon>frmClientes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmprincipal.resx">
       <DependentUpon>frmprincipal.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,8 +105,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AdminDB\.com.txt" />
-    <Content Include="CLIENTES\.gitpeek.txt" />
     <Content Include="COBRANZA\.gitpeek.txt" />
     <Content Include="COBROS\.gitpeek.txt" />
     <Content Include="Configuraciones\.gitpeek.txt" />
@@ -102,7 +113,6 @@
     <Content Include="Herramientas\.gitpeek.txt" />
     <Content Include="Iconos\.gitpeek.txt" />
     <Content Include="Iconos\icon app.ico" />
-    <Content Include="Model\.gitpeek.txt" />
     <Content Include="MOROSIDAD\.gitpeek.txt" />
     <Content Include="packages\MaterialSkin.2.2.3.1\lib\net45\MaterialSkin.dll" />
     <Content Include="packages\MaterialSkin.2.2.3.1\lib\net461\MaterialSkin.dll" />
