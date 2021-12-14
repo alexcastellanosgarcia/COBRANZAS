@@ -21,8 +21,7 @@ namespace COBRANZAS.CLIENTES
          
         }
 
-        public DataTable Consultar(int Id)     {
-
+        public TModelsClientes Consultar(int Id)     {
             DataTable dtClientes = new DataTable();
             using (SqlConnection con = new SqlConnection(objparamSql.getStringCon()))
             {                
@@ -52,12 +51,40 @@ namespace COBRANZAS.CLIENTES
                     MessageBox.Show($"La Operacion No Se Pudo Completar \n {Err.Message} ");
                 }
             }  
-            return dtClientes;
+            return objcliente;
         }
 
-        public bool Guardar (TModelsClientes prmCliente)
-        {
-            return false;
+        public bool Guardar (TModelsClientes prmCliente, string prmUsuario) {
+            bool ValResult = false;
+
+            using (SqlConnection con = new SqlConnection(objparamSql.getStringCon())) {
+                try
+                {
+                    con.Open();
+                    SqlCommand sql = new SqlCommand("SP_INSERTAR_CLIENTES", con);
+                    sql.CommandType = CommandType.StoredProcedure;
+                    sql.CommandText = "SP_INSERTAR_CLIENTES";
+                    sql.Parameters.AddWithValue("@prmIdentidad", prmCliente.Identidad);
+                    sql.Parameters.AddWithValue("prmNombre", prmCliente.Nombre);
+                    sql.Parameters.AddWithValue("@prmDireccion", prmCliente.Direccion);
+                    sql.Parameters.AddWithValue("@prmTelefono", prmCliente.Telefono);
+                    sql.Parameters.AddWithValue("@prmCorreo", prmCliente.Correo);
+                    sql.Parameters.AddWithValue("@prmMunicipio", prmCliente.Municipio);
+                    sql.Parameters.AddWithValue("@prmFechaNacimiento", prmCliente.FechaNacimiento);
+                    sql.Parameters.AddWithValue("@prmUsuario", prmUsuario);
+                    sql.Parameters.AddWithValue("@prmResult", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    sql.ExecuteNonQuery();
+                    String Num = sql.Parameters["Result"].Value.ToString();
+                    MessageBox.Show(Num);
+
+                }
+                catch (Exception Err )
+                {
+                    MessageBox.Show($"La Operacion No Se Pudo Completar \n {Err.Message} ");
+                }
+
+            }
+                return false;
         }
 
         public bool Modificar(TModelsClientes prmCliente)

@@ -14,7 +14,7 @@ namespace COBRANZAS.CLIENTES
     {
         TAD_Clientes objAD_Clientes = new TAD_Clientes();
 
-        public DataTable Consultar(String Id) {
+        public TModelsClientes Consultar(String Id) {
             var result = int.TryParse(Id, out int valId);
             if (result)
                 return objAD_Clientes.Consultar(valId);

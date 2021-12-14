@@ -30,17 +30,20 @@ namespace COBRANZAS.CLIENTES
         private void materialButton1_Click(object sender, EventArgs e)
         {
             var Cliente = objCNClientes.Consultar(txtID.Text);
-            if (Cliente.Rows.Count > 0)
-            {
-                foreach (DataRow Fila in Cliente.Rows)
-                {
-                    txtNOMBRE.Text = Fila["NOMBRE"].ToString();
-                    txtIDENTIDAD.Text = Fila["IDENTIDAD"].ToString();
-                }
-            }
+           
+               
+                    txtNOMBRE.Text = Cliente.Nombre;
+                    txtIDENTIDAD.Text = Cliente.Identidad
+                
+            
         }
 
         private void materialLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialButton1_Click_1(object sender, EventArgs e)
         {
 
         }
