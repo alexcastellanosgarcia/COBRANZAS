@@ -22,6 +22,10 @@ namespace COBRANZAS.CLIENTES
                 return default;
            
         }
+        public bool Guardar (TModelsClientes prmCliente, String prmUsuario)
+        {
+            return this.objAD_Clientes.Guardar(prmCliente, prmUsuario);
+        }
 
 
     }

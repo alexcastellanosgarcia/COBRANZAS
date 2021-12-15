@@ -21,8 +21,7 @@ namespace COBRANZAS.CLIENTES
          
         }
 
-        public TModelsClientes Consultar(int Id)     
-        {
+        public TModelsClientes Consultar(int Id)     {
             DataTable dtClientes = new DataTable();
             using (SqlConnection con = new SqlConnection(objparamSql.getStringCon()))
             {                
@@ -37,7 +36,6 @@ namespace COBRANZAS.CLIENTES
                         foreach (DataRow Fila in dtClientes.Rows)
                             {
                             objcliente.Id = Convert.ToInt32(Fila["ID"].ToString());
-                            objcliente.Nombre = (Fila["NOMBRE"].ToString());
                             objcliente.Identidad = (Fila["IDENTIDAD"].ToString());
                             objcliente.Direccion = (Fila["DIRECCION"].ToString());
                             objcliente.Telefono = (Fila["TELEFONO"].ToString());
@@ -57,7 +55,7 @@ namespace COBRANZAS.CLIENTES
         }
 
         public bool Guardar (TModelsClientes prmCliente, string prmUsuario) {
-            bool ValResult = false;
+            //bool ValResult = false;
 
             using (SqlConnection con = new SqlConnection(objparamSql.getStringCon())) {
                 try
@@ -74,12 +72,11 @@ namespace COBRANZAS.CLIENTES
                     sql.Parameters.AddWithValue("@prmMunicipio", prmCliente.Municipio);
                     sql.Parameters.AddWithValue("@prmFechaNacimiento", prmCliente.FechaNacimiento);
                     sql.Parameters.AddWithValue("@prmUsuario", prmUsuario);
-                    sql.Parameters.AddWithValue("@Result", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                    sql.Parameters.AddWithValue("@prmResult", SqlDbType.Int).Direction = ParameterDirection.Output;
                     sql.ExecuteNonQuery();
-                    int Num = (int)sql.Parameters["@Result"].Value;
+                    String Num = sql.Parameters["Result"].Value.ToString();
+                    MessageBox.Show(Num);
 
-                    if (Num == 1)
-                        ValResult = true;
                 }
                 catch (Exception Err )
                 {
@@ -87,7 +84,7 @@ namespace COBRANZAS.CLIENTES
                 }
 
             }
-                return ValResult;
+                return false;
         }
 
         public bool Modificar(TModelsClientes prmCliente)
