@@ -16,26 +16,29 @@ namespace COBRANZAS.CLIENTES
         TModelsClientes objcliente = new TModelsClientes();
         TParamSql objparamSql = new TParamSql();
 
-        public TAD_Clientes() 
-        { 
-         
-        }
+        List<TModelsClientes> objListClientes = new List<TModelsClientes>();
 
-        public TModelsClientes Consultar(int Id)     
+        public TAD_Clientes()
+        {
+
+        }
+        //Consulta la informacion de un cliente
+
+        public TModelsClientes Consultar(int Id)
         {
             DataTable dtClientes = new DataTable();
             using (SqlConnection con = new SqlConnection(objparamSql.getStringCon()))
-            {                
+            {
                 try {
                     con.Open();
                     SqlCommand query = new SqlCommand($"SELECT * FROM CLIENTES WHERE ID ={Id}", con);
-                    
+
                     dtClientes.Load(query.ExecuteReader());
                     con.Close();
                     if (dtClientes.Rows.Count > 0)
                     {
                         foreach (DataRow Fila in dtClientes.Rows)
-                            {
+                        {
                             objcliente.Id = Convert.ToInt32(Fila["ID"].ToString());
                             objcliente.Nombre = (Fila["NOMBRE"].ToString());
                             objcliente.Identidad = (Fila["IDENTIDAD"].ToString());
@@ -45,18 +48,52 @@ namespace COBRANZAS.CLIENTES
                             objcliente.Municipio = (Fila["MUNICIPIO"].ToString());
                             objcliente.UsuarioCreacion = (Fila["USUARIO_CREACION"].ToString());
                             objcliente.UsuarioModificacion = (Fila["USUARIO_MODIFICACION"].ToString());
-                                                    }
+                            DateTime Fecha_Creacion = new DateTime();
+                            objcliente.FechaCreacion = (DateTime.TryParse(Fila["FECHA_CREACION"].ToString(), out Fecha_Creacion) ? Fecha_Creacion : Fecha_Creacion);
+                            DateTime Fecha_Nacimiento = new DateTime(); ;
+                            objcliente.FechaNacimiento = (DateTime.TryParse(Fila["FECHA_NACIMIENTO"].ToString(), out Fecha_Nacimiento) ? Fecha_Nacimiento : Fecha_Nacimiento);
+                            DateTime Fecha_Mod = new DateTime();
+                            objcliente.FechaModificacion = (DateTime.TryParse(Fila["FECHA_MODIFICACION"].ToString(), out Fecha_Mod) ? Fecha_Mod : Fecha_Mod);
+
                         }
                     }
+                }
                 catch (Exception Err)
                 {
                     MessageBox.Show($"La Operacion No Se Pudo Completar \n {Err.Message} ");
                 }
-            }  
+            }
             return objcliente;
         }
 
-        public bool Guardar (TModelsClientes prmCliente, string prmUsuario) {
+
+        public List<TModelsClientes> GetClientes()
+        {
+            using (SqlConnection con = new SqlConnection(objparamSql.getStringCon())) 
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand consulta = new SqlCommand("SP_LISTAR_CLIENTES", con);
+                    DataTable dtDatos = new DataTable();
+                    dtDatos.Load(consulta.ExecuteReader());
+
+                    if (dtDatos.Rows.Count > 0)
+                    { 
+                        
+                    }
+                }
+                catch
+                { 
+
+                }
+                             }
+
+            return objListClientes;
+        }
+
+        //Guarda un nuevo registro para un Cliente
+    public bool Guardar (TModelsClientes prmCliente, string prmUsuario) {
             bool ValResult = false;
 
             using (SqlConnection con = new SqlConnection(objparamSql.getStringCon())) {
@@ -90,14 +127,48 @@ namespace COBRANZAS.CLIENTES
                 return ValResult;
         }
 
-        public bool Modificar(TModelsClientes prmCliente)
+        //Modifica la informacion de un cliente
+        public bool Modificar(TModelsClientes prmCliente, string prmUsuario)
         {
-            return false;
+            bool ValResult = false;
+
+            using (SqlConnection con = new SqlConnection(objparamSql.getStringCon()))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand sql = new SqlCommand("SP_ACTUALIZAR_CLIENTES", con);
+                    sql.CommandType = CommandType.StoredProcedure;
+                    sql.Parameters.AddWithValue("@prmId", prmCliente.Id);
+                    sql.Parameters.AddWithValue("@prmIdentidad", prmCliente.Identidad);
+                    sql.Parameters.AddWithValue("prmNombre", prmCliente.Nombre);
+                    sql.Parameters.AddWithValue("@prmDireccion", prmCliente.Direccion);
+                    sql.Parameters.AddWithValue("@prmTelefono", prmCliente.Telefono);
+                    sql.Parameters.AddWithValue("@prmCorreo", prmCliente.Correo);
+                    sql.Parameters.AddWithValue("@prmMunicipio", prmCliente.Municipio);
+                    sql.Parameters.AddWithValue("@prmFechaNacimiento", prmCliente.FechaNacimiento);
+                    sql.Parameters.AddWithValue("@prmUsuario", prmUsuario);
+                    sql.Parameters.AddWithValue("@Result", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                    sql.ExecuteNonQuery();
+                    int Num = (int)sql.Parameters["@Result"].Value;
+
+                    if (Num == 1)
+                        ValResult = true;
+                }
+                catch (Exception Err)
+                {
+                    MessageBox.Show($"La Operacion No Se Pudo Completar \n {Err.Message} ");
+                }
+
+            }
+            return ValResult;
         }
 
         public bool Anular(TModelsClientes prmCliente)
         {
             return false;
         }
+
+
     }
 }
