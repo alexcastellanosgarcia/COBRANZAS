@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 
+
 namespace COBRANZAS.CLIENTES
 {
     public class TAD_Clientes
@@ -66,30 +67,46 @@ namespace COBRANZAS.CLIENTES
             return objcliente;
         }
 
-
+        //Devuelve la Lista de Clientes
         public List<TModelsClientes> GetClientes()
         {
+            List<TModelsClientes> Clientes = new List<TModelsClientes>();
+
             using (SqlConnection con = new SqlConnection(objparamSql.getStringCon())) 
             {
                 try
                 {
                     con.Open();
-                    SqlCommand consulta = new SqlCommand("SP_LISTAR_CLIENTES", con);
-                    DataTable dtDatos = new DataTable();
-                    dtDatos.Load(consulta.ExecuteReader());
+                    SqlCommand objquery = new SqlCommand("SP_LISTAR_CLIENTES", con);
+                    DataTable objdtDatos = new DataTable();
+                    objdtDatos.Load(objquery.ExecuteReader());
 
-                    if (dtDatos.Rows.Count > 0)
-                    { 
-                        
+                    if (objdtDatos.Rows.Count > 0)
+                    {
+                        foreach (DataRow Fila in objdtDatos.Rows)
+                        {
+                            Clientes.Add(new TModelsClientes
+                            {
+                                Id = (int)Fila["ID"],
+                                Identidad = Fila["IDENTIDAD"].ToString(),
+                                Nombre = Fila["NOMBRE"].ToString(),
+                                Direccion = Fila["DIRECCION"].ToString(),
+                                Telefono = Fila["TELEFONO"].ToString(),
+                                Correo = Fila["CORREO"].ToString(),
+                                Municipio = Fila["MUNICIPIO"].ToString(),
+                                FechaNacimiento = (DateTime)Fila["FECHA_NACIMIENTO"],
+                                UsuarioCreacion = Fila["USUARIO_CREACION"].ToString()
+                            });                                                               
+                        }                                       
                     }
                 }
-                catch
-                { 
-
+                catch(Exception Err)
+                {
+                    MessageBox.Show($"La Operacion no se Pudo Completar\n {Err.Message} ");
                 }
                              }
 
-            return objListClientes;
+            return Clientes;
         }
 
         //Guarda un nuevo registro para un Cliente

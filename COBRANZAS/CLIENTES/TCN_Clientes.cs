@@ -31,5 +31,10 @@ namespace COBRANZAS.CLIENTES
             return this.objAD_Clientes.Modificar(prmCliente, prmUsuario);
         }
 
+        public List<TModelsClientes> GetClientes() 
+        {
+            return objAD_Clientes.GetClientes();
+        }
+
     }
 }

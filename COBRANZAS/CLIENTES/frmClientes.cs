@@ -29,6 +29,8 @@ namespace COBRANZAS.CLIENTES
             this.Accion = 1;
         }
 
+        
+        //Limpia los controles del formulario
         private void Limpiar() 
         {           
             tbxid.Text = "";
@@ -46,11 +48,22 @@ namespace COBRANZAS.CLIENTES
             this.Accion = 1;
         }
 
-        private void frmClientes_Load(object sender, EventArgs e)
+        // Carga Datos en el datagridview
+        private void CargarGrid()
         {
+            dgvClientes.Rows.Clear();
+            List<TModelsClientes> clientes = this.objCNClientes.GetClientes();
+            foreach (var col in clientes)
+            {
+                dgvClientes.Rows.Add(col.Id, col.Identidad, col.Nombre, col.Direccion, col.Telefono, col.Correo, col.Municipio, col.FechaNacimiento, col.UsuarioCreacion);
+            }
 
         }
-
+        private void frmClientes_Load(object sender, EventArgs e)
+        {
+            this.CargarGrid();
+        }
+        //boton guardar
         private void materialButton1_Click(object sender, EventArgs e)
         {
             var Cliente = objCNClientes.Consultar(tbxid.Text);
@@ -71,7 +84,8 @@ namespace COBRANZAS.CLIENTES
                 this.Accion = 2;
                 tbxid.Enabled = false;
             }
-            dgvClientes.DataSource = Cliente;
+            
+            this.CargarGrid();
         }
 
         private void materialLabel1_Click(object sender, EventArgs e)
@@ -83,7 +97,7 @@ namespace COBRANZAS.CLIENTES
         {
             TModelsClientes cliente = new TModelsClientes();
 
-            cliente.Id = Convert.ToInt32(tbxid.Text);
+            
             cliente.Identidad = tbxidentidad.Text;
             cliente.Nombre = tbxnombre.Text;            
             cliente.Direccion = tbxdireccion.Text;
@@ -96,10 +110,12 @@ namespace COBRANZAS.CLIENTES
 
             if (this.Accion == 1)
                 respuesta = this.objCNClientes.Guardar(cliente, this.Usuario);
-                
-            if (this.Accion == 2)
-                respuesta = this.objCNClientes.Modificar(cliente, this.Usuario);
 
+            if (this.Accion == 2)
+            {
+                cliente.Id = Convert.ToInt32(tbxid.Text);
+                respuesta = this.objCNClientes.Modificar(cliente, this.Usuario);                
+            }
             if (respuesta)
             {
                 MessageBox.Show("El Cliente se ha guardado exitosamente", "ACEPTAR", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -108,7 +124,8 @@ namespace COBRANZAS.CLIENTES
             }
             else
                 MessageBox.Show("El cliente no se ha podido Guardar", "ADVERTENCIA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                       
+
+            this.CargarGrid();
         }
 
         private void tbxFechaNac_TextChanged(object sender, EventArgs e)
@@ -130,9 +147,25 @@ namespace COBRANZAS.CLIENTES
         {
             this.Limpiar();
             tbxid.Enabled = true;
+            this.CargarGrid();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)       
+        {
+
+        }
+
+        private void False(object sender, EventArgs e)
+        {
+
+        }
+
+        private void True(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

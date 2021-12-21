@@ -48,12 +48,21 @@ namespace COBRANZAS.CLIENTES
             this.dtpFechaNac = new System.Windows.Forms.DateTimePicker();
             this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
-            this.lblFechaCreacion = new MaterialSkin.Controls.MaterialLabel();
-            this.lblCreadopor = new MaterialSkin.Controls.MaterialLabel();
-            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
-            this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.lblFechaMod = new MaterialSkin.Controls.MaterialLabel();
             this.lblUsuarioMod = new MaterialSkin.Controls.MaterialLabel();
+            this.lblFechaMod = new MaterialSkin.Controls.MaterialLabel();
+            this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
+            this.lblCreadopor = new MaterialSkin.Controls.MaterialLabel();
+            this.lblFechaCreacion = new MaterialSkin.Controls.MaterialLabel();
+            this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_identidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_municipio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_fecha_nac = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.con_usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.materialCard1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -353,7 +362,7 @@ namespace COBRANZAS.CLIENTES
             this.materialCard1.Controls.Add(this.materialLabel4);
             this.materialCard1.Controls.Add(this.btnGuardar);
             this.materialCard1.Depth = 0;
-            this.materialCard1.ForeColor = System.Drawing.Color.Black;
+            this.materialCard1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialCard1.Location = new System.Drawing.Point(17, 78);
             this.materialCard1.Margin = new System.Windows.Forms.Padding(14);
             this.materialCard1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -363,32 +372,56 @@ namespace COBRANZAS.CLIENTES
             this.materialCard1.TabIndex = 0;
             this.materialCard1.Paint += new System.Windows.Forms.PaintEventHandler(this.materialCard1_Paint);
             // 
-            // lblFechaCreacion
+            // lblUsuarioMod
             // 
-            this.lblFechaCreacion.AutoSize = true;
-            this.lblFechaCreacion.Depth = 0;
-            this.lblFechaCreacion.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblFechaCreacion.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblFechaCreacion.Location = new System.Drawing.Point(259, 494);
-            this.lblFechaCreacion.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblFechaCreacion.Name = "lblFechaCreacion";
-            this.lblFechaCreacion.Size = new System.Drawing.Size(75, 19);
-            this.lblFechaCreacion.TabIndex = 18;
-            this.lblFechaCreacion.Text = "Creado el: ";
-            this.lblFechaCreacion.Click += new System.EventHandler(this.materialLabel9_Click);
+            this.lblUsuarioMod.AutoSize = true;
+            this.lblUsuarioMod.Depth = 0;
+            this.lblUsuarioMod.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblUsuarioMod.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lblUsuarioMod.Location = new System.Drawing.Point(572, 494);
+            this.lblUsuarioMod.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblUsuarioMod.Name = "lblUsuarioMod";
+            this.lblUsuarioMod.Size = new System.Drawing.Size(121, 19);
+            this.lblUsuarioMod.TabIndex = 23;
+            this.lblUsuarioMod.Text = "Modificado por:  ";
             // 
-            // lblCreadopor
+            // lblFechaMod
             // 
-            this.lblCreadopor.AutoSize = true;
-            this.lblCreadopor.Depth = 0;
-            this.lblCreadopor.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblCreadopor.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblCreadopor.Location = new System.Drawing.Point(28, 494);
-            this.lblCreadopor.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblCreadopor.Name = "lblCreadopor";
-            this.lblCreadopor.Size = new System.Drawing.Size(86, 19);
-            this.lblCreadopor.TabIndex = 19;
-            this.lblCreadopor.Text = "Creado por: ";
+            this.lblFechaMod.AutoSize = true;
+            this.lblFechaMod.Depth = 0;
+            this.lblFechaMod.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblFechaMod.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lblFechaMod.Location = new System.Drawing.Point(811, 494);
+            this.lblFechaMod.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblFechaMod.Name = "lblFechaMod";
+            this.lblFechaMod.Size = new System.Drawing.Size(110, 19);
+            this.lblFechaMod.TabIndex = 22;
+            this.lblFechaMod.Text = "Modificado el:  ";
+            // 
+            // dgvClientes
+            // 
+            this.dgvClientes.AllowUserToAddRows = false;
+            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.col_id,
+            this.col_identidad,
+            this.col_nombre,
+            this.col_direccion,
+            this.col_telefono,
+            this.col_correo,
+            this.col_municipio,
+            this.col_fecha_nac,
+            this.con_usuario});
+            this.dgvClientes.Location = new System.Drawing.Point(489, 17);
+            this.dgvClientes.Name = "dgvClientes";
+            this.dgvClientes.ReadOnly = true;
+            this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvClientes.Size = new System.Drawing.Size(740, 392);
+            this.dgvClientes.TabIndex = 21;
+            this.dgvClientes.AllowUserToAddRowsChanged += new System.EventHandler(this.False);
+            this.dgvClientes.ReadOnlyChanged += new System.EventHandler(this.True);
+            this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
+            this.dgvClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // materialButton1
             // 
@@ -410,40 +443,81 @@ namespace COBRANZAS.CLIENTES
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click_2);
             // 
-            // dgvClientes
+            // lblCreadopor
             // 
-            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClientes.Location = new System.Drawing.Point(521, 211);
-            this.dgvClientes.Name = "dgvClientes";
-            this.dgvClientes.Size = new System.Drawing.Size(681, 198);
-            this.dgvClientes.TabIndex = 21;
-            this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.lblCreadopor.AutoSize = true;
+            this.lblCreadopor.Depth = 0;
+            this.lblCreadopor.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblCreadopor.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lblCreadopor.Location = new System.Drawing.Point(28, 494);
+            this.lblCreadopor.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblCreadopor.Name = "lblCreadopor";
+            this.lblCreadopor.Size = new System.Drawing.Size(86, 19);
+            this.lblCreadopor.TabIndex = 19;
+            this.lblCreadopor.Text = "Creado por: ";
             // 
-            // lblFechaMod
+            // lblFechaCreacion
             // 
-            this.lblFechaMod.AutoSize = true;
-            this.lblFechaMod.Depth = 0;
-            this.lblFechaMod.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblFechaMod.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblFechaMod.Location = new System.Drawing.Point(811, 494);
-            this.lblFechaMod.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblFechaMod.Name = "lblFechaMod";
-            this.lblFechaMod.Size = new System.Drawing.Size(110, 19);
-            this.lblFechaMod.TabIndex = 22;
-            this.lblFechaMod.Text = "Modificado el:  ";
+            this.lblFechaCreacion.AutoSize = true;
+            this.lblFechaCreacion.Depth = 0;
+            this.lblFechaCreacion.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblFechaCreacion.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.lblFechaCreacion.Location = new System.Drawing.Point(259, 494);
+            this.lblFechaCreacion.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblFechaCreacion.Name = "lblFechaCreacion";
+            this.lblFechaCreacion.Size = new System.Drawing.Size(75, 19);
+            this.lblFechaCreacion.TabIndex = 18;
+            this.lblFechaCreacion.Text = "Creado el: ";
+            this.lblFechaCreacion.Click += new System.EventHandler(this.materialLabel9_Click);
             // 
-            // lblUsuarioMod
+            // col_id
             // 
-            this.lblUsuarioMod.AutoSize = true;
-            this.lblUsuarioMod.Depth = 0;
-            this.lblUsuarioMod.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblUsuarioMod.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblUsuarioMod.Location = new System.Drawing.Point(572, 494);
-            this.lblUsuarioMod.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblUsuarioMod.Name = "lblUsuarioMod";
-            this.lblUsuarioMod.Size = new System.Drawing.Size(121, 19);
-            this.lblUsuarioMod.TabIndex = 23;
-            this.lblUsuarioMod.Text = "Modificado por:  ";
+            this.col_id.HeaderText = "Id";
+            this.col_id.Name = "col_id";
+            this.col_id.Width = 30;
+            // 
+            // col_identidad
+            // 
+            this.col_identidad.HeaderText = "Identidad";
+            this.col_identidad.Name = "col_identidad";
+            // 
+            // col_nombre
+            // 
+            this.col_nombre.HeaderText = "Nombre";
+            this.col_nombre.Name = "col_nombre";
+            this.col_nombre.Width = 120;
+            // 
+            // col_direccion
+            // 
+            this.col_direccion.HeaderText = "Direccion";
+            this.col_direccion.Name = "col_direccion";
+            // 
+            // col_telefono
+            // 
+            this.col_telefono.HeaderText = "Telefono";
+            this.col_telefono.Name = "col_telefono";
+            // 
+            // col_correo
+            // 
+            this.col_correo.HeaderText = "Correo";
+            this.col_correo.Name = "col_correo";
+            this.col_correo.Width = 120;
+            // 
+            // col_municipio
+            // 
+            this.col_municipio.HeaderText = "Municipio";
+            this.col_municipio.Name = "col_municipio";
+            this.col_municipio.Width = 120;
+            // 
+            // col_fecha_nac
+            // 
+            this.col_fecha_nac.HeaderText = "Fecha Nacimiento";
+            this.col_fecha_nac.Name = "col_fecha_nac";
+            // 
+            // con_usuario
+            // 
+            this.con_usuario.HeaderText = "Usuario";
+            this.con_usuario.Name = "con_usuario";
             // 
             // frmClientes
             // 
@@ -489,5 +563,14 @@ namespace COBRANZAS.CLIENTES
         private System.Windows.Forms.DataGridView dgvClientes;
         private MaterialSkin.Controls.MaterialLabel lblUsuarioMod;
         private MaterialSkin.Controls.MaterialLabel lblFechaMod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_identidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_direccion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_correo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_municipio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_fecha_nac;
+        private System.Windows.Forms.DataGridViewTextBoxColumn con_usuario;
     }
 }
