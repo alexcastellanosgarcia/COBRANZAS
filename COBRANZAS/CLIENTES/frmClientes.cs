@@ -30,7 +30,7 @@ namespace COBRANZAS.CLIENTES
         }
 
         
-        //Limpia los controles del formulario
+    //Limpia los controles del formulario
         private void Limpiar() 
         {           
             tbxid.Text = "";
@@ -48,14 +48,14 @@ namespace COBRANZAS.CLIENTES
             this.Accion = 1;
         }
 
-        // Carga Datos en el datagridview
+    // Carga Datos en el datagridview
         private void CargarGrid()
         {
             dgvClientes.Rows.Clear();
             List<TModelsClientes> clientes = this.objCNClientes.GetClientes();
             foreach (var col in clientes)
             {
-                dgvClientes.Rows.Add(col.Id, col.Identidad, col.Nombre, col.Direccion, col.Telefono, col.Correo, col.Municipio, col.FechaNacimiento, col.UsuarioCreacion);
+                dgvClientes.Rows.Add(col.Id, col.Identidad, col.Nombre, col.Direccion, col.Telefono, col.Correo, col.Municipio, col.FechaNacimiento, col.UsuarioCreacion, col.Activo);
             }
 
         }
@@ -63,7 +63,8 @@ namespace COBRANZAS.CLIENTES
         {
             this.CargarGrid();
         }
-        //boton guardar
+        
+    //Boton Buscar Clientes
         private void materialButton1_Click(object sender, EventArgs e)
         {
             var Cliente = objCNClientes.Consultar(tbxid.Text);
@@ -93,6 +94,8 @@ namespace COBRANZAS.CLIENTES
 
         }
 
+
+    //Boton Guardar Clientes
         private void materialButton1_Click_1(object sender, EventArgs e)
         {
             TModelsClientes cliente = new TModelsClientes();
@@ -143,6 +146,8 @@ namespace COBRANZAS.CLIENTES
 
         }
 
+
+    //Boton Limpiar Datos en texbox
         private void materialButton1_Click_2(object sender, EventArgs e)
         {
             this.Limpiar();
@@ -150,9 +155,23 @@ namespace COBRANZAS.CLIENTES
             this.CargarGrid();
         }
 
+    //Metodo para cargar datos de datagridview en los texbox para Modificacion
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)       
         {
+            int numFila = e.RowIndex;
 
+            tbxid.Text = dgvClientes.Rows[numFila].Cells["col_id"].Value.ToString();
+            tbxidentidad.Text = dgvClientes.Rows[numFila].Cells["col_identidad"].Value.ToString();
+            tbxnombre.Text = dgvClientes.Rows[numFila].Cells["col_nombre"].Value.ToString();
+            tbxdireccion.Text = dgvClientes.Rows[numFila].Cells["col_direccion"].Value.ToString();
+            tbxtelefono.Text = dgvClientes.Rows[numFila].Cells["col_telefono"].Value.ToString();
+            tbxcorreo.Text = dgvClientes.Rows[numFila].Cells["col_correo"].Value.ToString();
+            tbxmunicipio.Text = dgvClientes.Rows[numFila].Cells["col_municipio"].Value.ToString();
+            tbxcorreo.Text = dgvClientes.Rows[numFila].Cells["col_correo"].Value.ToString();
+            dtpFechaNac.Text = dgvClientes.Rows[numFila].Cells["col_fecha_nac"].Value.ToString();
+
+            this.Accion = 2;
+            tbxid.Enabled = false;
         }
 
         private void False(object sender, EventArgs e)
@@ -167,7 +186,7 @@ namespace COBRANZAS.CLIENTES
 
         private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
     }
 }

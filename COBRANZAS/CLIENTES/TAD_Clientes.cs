@@ -23,8 +23,8 @@ namespace COBRANZAS.CLIENTES
         {
 
         }
-        //Consulta la informacion de un cliente
 
+//Consulta la informacion de un cliente
         public TModelsClientes Consultar(int Id)
         {
             DataTable dtClientes = new DataTable();
@@ -67,7 +67,7 @@ namespace COBRANZAS.CLIENTES
             return objcliente;
         }
 
-        //Devuelve la Lista de Clientes
+//Devuelve la Lista de Clientes
         public List<TModelsClientes> GetClientes()
         {
             List<TModelsClientes> Clientes = new List<TModelsClientes>();
@@ -95,8 +95,10 @@ namespace COBRANZAS.CLIENTES
                                 Correo = Fila["CORREO"].ToString(),
                                 Municipio = Fila["MUNICIPIO"].ToString(),
                                 FechaNacimiento = (DateTime)Fila["FECHA_NACIMIENTO"],
-                                UsuarioCreacion = Fila["USUARIO_CREACION"].ToString()
-                            });                                                               
+                                UsuarioCreacion = Fila["USUARIO_CREACION"].ToString(),                               
+                                Activo = (Fila["ACTIVO"].ToString() == "true" ? true : false)
+
+                            });                                                           
                         }                                       
                     }
                 }
@@ -109,8 +111,9 @@ namespace COBRANZAS.CLIENTES
             return Clientes;
         }
 
-        //Guarda un nuevo registro para un Cliente
-    public bool Guardar (TModelsClientes prmCliente, string prmUsuario) {
+//Guarda un nuevo registro para un Cliente
+    public bool Guardar (TModelsClientes prmCliente, string prmUsuario) 
+        {
             bool ValResult = false;
 
             using (SqlConnection con = new SqlConnection(objparamSql.getStringCon())) {
@@ -144,7 +147,7 @@ namespace COBRANZAS.CLIENTES
                 return ValResult;
         }
 
-        //Modifica la informacion de un cliente
+//Modifica o Actualiza la informacion de un cliente
         public bool Modificar(TModelsClientes prmCliente, string prmUsuario)
         {
             bool ValResult = false;
@@ -180,10 +183,34 @@ namespace COBRANZAS.CLIENTES
             }
             return ValResult;
         }
-
-        public bool Anular(TModelsClientes prmCliente)
+//Anula la informacion de un cliente
+        public bool Anular(int prmIdCliente)
         {
-            return false;
+            bool ValResult = false;
+
+            using (SqlConnection con = new SqlConnection(objparamSql.getStringCon()))
+            {
+                try
+                {
+                    con.Open();
+                    SqlCommand sql = new SqlCommand("SP_ANULAR_CLIENTES", con);
+                    sql.CommandType = CommandType.StoredProcedure;
+                    sql.CommandText = "SP_INSERTAR_CLIENTES";
+                    sql.Parameters.AddWithValue("@prmId", prmIdCliente);                    
+                    sql.Parameters.AddWithValue("@Result", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                    sql.ExecuteNonQuery();
+                    int Num = (int)sql.Parameters["@Result"].Value;
+
+                    if (Num == 1)
+                        ValResult = true;
+                }
+                catch (Exception Err)
+                {
+                    MessageBox.Show($"La Operacion No Se Pudo Completar \n {Err.Message} ");
+                }
+
+            }
+            return ValResult;
         }
 
 

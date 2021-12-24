@@ -21,6 +21,7 @@ namespace COBRANZAS.Model
         public DateTime FechaModificacion { set; get; }
         public String UsuarioCreacion { set; get; }
         public string UsuarioModificacion { set; get; }
+        public bool Activo { set; get; }
 
     }
 }

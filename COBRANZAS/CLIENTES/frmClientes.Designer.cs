@@ -54,6 +54,7 @@ namespace COBRANZAS.CLIENTES
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.lblCreadopor = new MaterialSkin.Controls.MaterialLabel();
             this.lblFechaCreacion = new MaterialSkin.Controls.MaterialLabel();
+            this.bntAnular = new MaterialSkin.Controls.MaterialButton();
             this.col_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_identidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,7 +63,8 @@ namespace COBRANZAS.CLIENTES
             this.col_correo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_municipio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_fecha_nac = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.con_usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.materialCard1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
@@ -211,7 +213,7 @@ namespace COBRANZAS.CLIENTES
             this.btnGuardar.Depth = 0;
             this.btnGuardar.HighEmphasis = true;
             this.btnGuardar.Icon = null;
-            this.btnGuardar.Location = new System.Drawing.Point(306, 417);
+            this.btnGuardar.Location = new System.Drawing.Point(262, 413);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGuardar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnGuardar.Name = "btnGuardar";
@@ -317,9 +319,9 @@ namespace COBRANZAS.CLIENTES
             this.dtpFechaNac.CustomFormat = "dd/MM/yyyy hh:mm tt";
             this.dtpFechaNac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaNac.Location = new System.Drawing.Point(163, 423);
+            this.dtpFechaNac.Location = new System.Drawing.Point(135, 420);
             this.dtpFechaNac.Name = "dtpFechaNac";
-            this.dtpFechaNac.Size = new System.Drawing.Size(127, 26);
+            this.dtpFechaNac.Size = new System.Drawing.Size(119, 26);
             this.dtpFechaNac.TabIndex = 16;
             // 
             // materialLabel8
@@ -330,13 +332,14 @@ namespace COBRANZAS.CLIENTES
             this.materialLabel8.Location = new System.Drawing.Point(28, 427);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
-            this.materialLabel8.Size = new System.Drawing.Size(129, 19);
+            this.materialLabel8.Size = new System.Drawing.Size(80, 19);
             this.materialLabel8.TabIndex = 15;
-            this.materialLabel8.Text = "Fecha Nacimiento";
+            this.materialLabel8.Text = "Fecha Nac.";
             // 
             // materialCard1
             // 
             this.materialCard1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard1.Controls.Add(this.bntAnular);
             this.materialCard1.Controls.Add(this.lblUsuarioMod);
             this.materialCard1.Controls.Add(this.lblFechaMod);
             this.materialCard1.Controls.Add(this.dgvClientes);
@@ -401,6 +404,7 @@ namespace COBRANZAS.CLIENTES
             // dgvClientes
             // 
             this.dgvClientes.AllowUserToAddRows = false;
+            this.dgvClientes.AllowUserToOrderColumns = true;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_id,
@@ -411,16 +415,14 @@ namespace COBRANZAS.CLIENTES
             this.col_correo,
             this.col_municipio,
             this.col_fecha_nac,
-            this.con_usuario});
+            this.col_usuario,
+            this.col_activo});
             this.dgvClientes.Location = new System.Drawing.Point(489, 17);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(740, 392);
+            this.dgvClientes.Size = new System.Drawing.Size(740, 387);
             this.dgvClientes.TabIndex = 21;
-            this.dgvClientes.AllowUserToAddRowsChanged += new System.EventHandler(this.False);
-            this.dgvClientes.ReadOnlyChanged += new System.EventHandler(this.True);
-            this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
             this.dgvClientes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // materialButton1
@@ -430,7 +432,7 @@ namespace COBRANZAS.CLIENTES
             this.materialButton1.Depth = 0;
             this.materialButton1.HighEmphasis = true;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(412, 417);
+            this.materialButton1.Location = new System.Drawing.Point(358, 413);
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
@@ -470,54 +472,88 @@ namespace COBRANZAS.CLIENTES
             this.lblFechaCreacion.Text = "Creado el: ";
             this.lblFechaCreacion.Click += new System.EventHandler(this.materialLabel9_Click);
             // 
+            // bntAnular
+            // 
+            this.bntAnular.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.bntAnular.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.bntAnular.Depth = 0;
+            this.bntAnular.HighEmphasis = true;
+            this.bntAnular.Icon = null;
+            this.bntAnular.Location = new System.Drawing.Point(445, 413);
+            this.bntAnular.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.bntAnular.MouseState = MaterialSkin.MouseState.HOVER;
+            this.bntAnular.Name = "bntAnular";
+            this.bntAnular.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.bntAnular.Size = new System.Drawing.Size(79, 36);
+            this.bntAnular.TabIndex = 24;
+            this.bntAnular.Text = "Anular";
+            this.bntAnular.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.bntAnular.UseAccentColor = false;
+            this.bntAnular.UseVisualStyleBackColor = true;
+            // 
             // col_id
             // 
             this.col_id.HeaderText = "Id";
             this.col_id.Name = "col_id";
+            this.col_id.ReadOnly = true;
             this.col_id.Width = 30;
             // 
             // col_identidad
             // 
             this.col_identidad.HeaderText = "Identidad";
             this.col_identidad.Name = "col_identidad";
+            this.col_identidad.ReadOnly = true;
             // 
             // col_nombre
             // 
             this.col_nombre.HeaderText = "Nombre";
             this.col_nombre.Name = "col_nombre";
+            this.col_nombre.ReadOnly = true;
             this.col_nombre.Width = 120;
             // 
             // col_direccion
             // 
             this.col_direccion.HeaderText = "Direccion";
             this.col_direccion.Name = "col_direccion";
+            this.col_direccion.ReadOnly = true;
             // 
             // col_telefono
             // 
             this.col_telefono.HeaderText = "Telefono";
             this.col_telefono.Name = "col_telefono";
+            this.col_telefono.ReadOnly = true;
             // 
             // col_correo
             // 
             this.col_correo.HeaderText = "Correo";
             this.col_correo.Name = "col_correo";
+            this.col_correo.ReadOnly = true;
             this.col_correo.Width = 120;
             // 
             // col_municipio
             // 
             this.col_municipio.HeaderText = "Municipio";
             this.col_municipio.Name = "col_municipio";
+            this.col_municipio.ReadOnly = true;
             this.col_municipio.Width = 120;
             // 
             // col_fecha_nac
             // 
             this.col_fecha_nac.HeaderText = "Fecha Nacimiento";
             this.col_fecha_nac.Name = "col_fecha_nac";
+            this.col_fecha_nac.ReadOnly = true;
             // 
-            // con_usuario
+            // col_usuario
             // 
-            this.con_usuario.HeaderText = "Usuario";
-            this.con_usuario.Name = "con_usuario";
+            this.col_usuario.HeaderText = "Usuario";
+            this.col_usuario.Name = "col_usuario";
+            this.col_usuario.ReadOnly = true;
+            // 
+            // col_activo
+            // 
+            this.col_activo.HeaderText = "Activo";
+            this.col_activo.Name = "col_activo";
+            this.col_activo.ReadOnly = true;
             // 
             // frmClientes
             // 
@@ -563,6 +599,7 @@ namespace COBRANZAS.CLIENTES
         private System.Windows.Forms.DataGridView dgvClientes;
         private MaterialSkin.Controls.MaterialLabel lblUsuarioMod;
         private MaterialSkin.Controls.MaterialLabel lblFechaMod;
+        private MaterialSkin.Controls.MaterialButton bntAnular;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_identidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_nombre;
@@ -571,6 +608,7 @@ namespace COBRANZAS.CLIENTES
         private System.Windows.Forms.DataGridViewTextBoxColumn col_correo;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_municipio;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_fecha_nac;
-        private System.Windows.Forms.DataGridViewTextBoxColumn con_usuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_usuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_activo;
     }
 }
